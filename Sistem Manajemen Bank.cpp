@@ -222,3 +222,35 @@ void cekSaldo() {
 
     cout << "Akun tidak ditemukan." << endl;
 }
+void transferUang() {
+    int nomorAkunAsal, nomorAkunTujuan;
+    double jumlah;
+
+    cout << "Masukkan nomor akun pengirim: ";
+    cin >> nomorAkunAsal;
+
+    cout << "Masukkan nomor akun penerima: ";
+    cin >> nomorAkunTujuan;
+
+    cout << "Masukkan jumlah yang akan ditransfer: ";
+    cin >> jumlah;
+
+    Akun* akunAsal = nullptr;
+    Akun* akunTujuan = nullptr;
+
+    for (Akun& akun : daftarAkun) {
+        if (akun.getNomorAkun() == nomorAkunAsal) {
+            akunAsal = &akun;
+        }
+        if (akun.getNomorAkun() == nomorAkunTujuan) {
+            akunTujuan = &akun;
+        }
+    }
+
+    if (akunAsal == nullptr || akunTujuan == nullptr) {
+        cout << "Salah satu atau kedua akun tidak ditemukan." << endl;
+        return;
+    }
+
+    akunAsal->transfer(*akunTujuan, jumlah);
+}
