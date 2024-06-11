@@ -53,7 +53,7 @@ public:
         } else {
             saldo -= jumlah;
             cout << "Berhasil menarik " << jumlah << " dari akun " << nomorAkun << endl;
-            catatTransaksi("Tarik", -jumlah); // Nilai negatif menandakan penarikan
+            catatTransaksi("Tarik", -jumlah);
         }
     }
 
@@ -68,7 +68,7 @@ public:
             tarik(jumlah);
             tujuan.deposit(jumlah);
             cout << "Transfer berhasil." << endl;
-            catatTransaksi("Transfer keluar", -jumlah); // Nilai negatif menandakan transfer keluar
+            catatTransaksi("Transfer keluar", -jumlah);
             tujuan.catatTransaksi("Transfer masuk", jumlah);
         }
     }
@@ -85,21 +85,64 @@ public:
         return saldo;
     }
 
-    // Fungsi untuk mencatat transaksi
     void catatTransaksi(string jenisTransaksi, double jumlah) {
         Transaksi transaksi(jenisTransaksi, nomorAkun, jumlah);
         riwayatTransaksi.push_back(transaksi);
     }
 
-    // Fungsi untuk menampilkan riwayat transaksi
     void tampilkanRiwayatTransaksi() const {
         cout << "\nRiwayat Transaksi untuk Akun " << nomorAkun << " (" << nama << "):\n";
         cout << setw(15) << "Waktu" << setw(20) << "Jenis Transaksi" << setw(15) << "Nomor Akun" << setw(15) << "Jumlah" << endl;
         for (const Transaksi& transaksi : riwayatTransaksi) {
-            // Konversi waktu ke format string yang lebih mudah dibaca
             char waktu[100];
             strftime(waktu, sizeof(waktu), "%Y-%m-%d %H:%M:%S", localtime(&transaksi.waktuTransaksi));
 
             cout << setw(15) << waktu << setw(20) << transaksi.jenisTransaksi << setw(15) << transaksi.nomorAkun << setw(15) << transaksi.jumlah << endl;
         }
     }
+
+    string getNamaPengguna() const {
+        return namaPengguna;
+    }
+
+    // Getter untuk kata sandi
+    string getKataSandi() const {
+        return kataSandi;
+    }
+};
+
+vector<Akun> daftarAkun;
+
+void buatAkun() {
+    int nomorAkun;
+    string nama, namaPengguna, kataSandi;
+    double saldo;
+
+    cout << "Masukkan nomor akun: ";
+    cin >> nomorAkun;
+
+    for (const Akun& akun : daftarAkun) {
+        if (akun.getNomorAkun() == nomorAkun) {
+            cout << "Nomor akun sudah ada. Masukkan nomor akun lain." << endl;
+            return;
+        }
+    }
+
+    cout << "Masukkan nama: ";
+    cin.ignore();
+    getline(cin, nama);
+
+    cout << "Masukkan nama pengguna: ";
+    cin >> namaPengguna;
+
+    cout << "Masukkan kata sandi: ";
+    cin >> kataSandi;
+
+    cout << "Masukkan saldo awal: ";
+    cin >> saldo;
+
+    Akun akun(nomorAkun, nama, saldo, namaPengguna, kataSandi);
+    daftarAkun.push_back(akun);
+
+    cout << "Akun berhasil dibuat!" << endl;
+}
