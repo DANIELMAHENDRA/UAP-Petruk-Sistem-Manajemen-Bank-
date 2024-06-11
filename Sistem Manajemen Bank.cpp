@@ -254,3 +254,15 @@ void transferUang() {
 
     akunAsal->transfer(*akunTujuan, jumlah);
 }
+void tampilkanSemuaAkun() {
+    if (daftarAkun.empty()) {
+        cout << "Tidak ada akun ditemukan." << endl;
+        return;
+    }
+
+    cout << "\nDaftar Akun:\n";
+    cout << setw(15) << "Nomor Akun" << setw(20) << "Nama" << setw(15) << "Saldo" << endl;
+    for (const Akun& akun : daftarAkun) {
+        cout << setw(15) << akun.getNomorAkun() << setw(20) << akun.getNama() << setw(15) << akun.getSaldo() << endl;
+    }
+}
