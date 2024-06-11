@@ -72,3 +72,34 @@ public:
             tujuan.catatTransaksi("Transfer masuk", jumlah);
         }
     }
+
+    int getNomorAkun() const {
+        return nomorAkun;
+    }
+
+    string getNama() const {
+        return nama;
+    }
+
+    double getSaldo() const {
+        return saldo;
+    }
+
+    // Fungsi untuk mencatat transaksi
+    void catatTransaksi(string jenisTransaksi, double jumlah) {
+        Transaksi transaksi(jenisTransaksi, nomorAkun, jumlah);
+        riwayatTransaksi.push_back(transaksi);
+    }
+
+    // Fungsi untuk menampilkan riwayat transaksi
+    void tampilkanRiwayatTransaksi() const {
+        cout << "\nRiwayat Transaksi untuk Akun " << nomorAkun << " (" << nama << "):\n";
+        cout << setw(15) << "Waktu" << setw(20) << "Jenis Transaksi" << setw(15) << "Nomor Akun" << setw(15) << "Jumlah" << endl;
+        for (const Transaksi& transaksi : riwayatTransaksi) {
+            // Konversi waktu ke format string yang lebih mudah dibaca
+            char waktu[100];
+            strftime(waktu, sizeof(waktu), "%Y-%m-%d %H:%M:%S", localtime(&transaksi.waktuTransaksi));
+
+            cout << setw(15) << waktu << setw(20) << transaksi.jenisTransaksi << setw(15) << transaksi.nomorAkun << setw(15) << transaksi.jumlah << endl;
+        }
+    }
