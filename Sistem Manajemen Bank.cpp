@@ -186,3 +186,39 @@ void setorUang() {
 
     cout << "Akun tidak ditemukan." << endl;
 }
+
+void tarikUang() {
+    int nomorAkun;
+    double jumlah;
+
+    cout << "Masukkan nomor akun: ";
+    cin >> nomorAkun;
+
+    cout << "Masukkan jumlah yang akan ditarik: ";
+    cin >> jumlah;
+
+    for (Akun& akun : daftarAkun) {
+        if (akun.getNomorAkun() == nomorAkun) {
+            akun.tarik(jumlah);
+            return;
+        }
+    }
+
+    cout << "Akun tidak ditemukan." << endl;
+}
+
+void cekSaldo() {
+    int nomorAkun;
+
+    cout << "Masukkan nomor akun: ";
+    cin >> nomorAkun;
+
+    for (const Akun& akun : daftarAkun) {
+        if (akun.getNomorAkun() == nomorAkun) {
+            akun.cekSaldo();
+            return;
+        }
+    }
+
+    cout << "Akun tidak ditemukan." << endl;
+}
