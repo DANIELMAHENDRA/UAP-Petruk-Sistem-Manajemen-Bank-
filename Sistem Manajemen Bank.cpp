@@ -105,7 +105,7 @@ public:
         return namaPengguna;
     }
 
-    // Getter untuk kata sandi
+    
     string getKataSandi() const {
         return kataSandi;
     }
@@ -303,7 +303,7 @@ int main() {
                     cout << "Belum ada akun yang terdaftar. Silakan buat akun terlebih dahulu." << endl;
                 } else {
                     if (login()) {
-                        // Menu utama setelah login
+                        
                         while (true) {
                             cout << "\nSistem Manajemen Bank\n";
                             cout << "1. Setor Uang\n";
@@ -315,3 +315,65 @@ int main() {
                             cout << "7. Keluar\n";
                             cout << "Masukkan pilihan Anda: ";
                             cin >> pilihan;
+
+switch (pilihan) {
+            case 1:
+                buatAkun();
+                break;
+            case 2:
+                if (daftarAkun.empty()) {
+                    cout << "Belum ada akun yang terdaftar. Silakan buat akun terlebih dahulu." << endl;
+                } else {
+                    if (login()) {
+                        
+                        while (true) {
+                            cout << "\nSistem Manajemen Bank\n";
+                            cout << "1. Setor Uang\n";
+                            cout << "2. Tarik Uang\n";
+                            cout << "3. Transfer Uang\n";
+                            cout << "4. Cek Saldo\n";
+                            cout << "5. Tampilkan Semua Akun\n";
+                            cout << "6. Tampilkan Riwayat Transaksi\n";
+                            cout << "7. Keluar\n";
+                            cout << "Masukkan pilihan Anda: ";
+                            cin >> pilihan;
+
+                            switch (pilihan) {
+                                case 1:
+                                    setorUang();
+                                    break;
+                                case 2:
+                                    tarikUang();
+                                    break;
+                                case 3:
+                                    transferUang();
+                                    break;
+                                case 4:
+                                    cekSaldo();
+                                    break;
+                                case 5:
+                                    tampilkanSemuaAkun();
+                                    break;
+                                case 6:
+                                    tampilkanRiwayatTransaksi();
+                                    break;
+                                case 7:
+                                    cout << "Keluar dari sistem..." << endl;
+                                    exit(0);
+                                default:
+                                    cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+                            }
+                        }
+                    }
+                }
+                break;
+            case 3:
+                cout << "Keluar dari sistem..." << endl;
+                exit(0);
+            default:
+                cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+        }
+    }
+
+    return 0;
+}
