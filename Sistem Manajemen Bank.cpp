@@ -146,3 +146,43 @@ void buatAkun() {
 
     cout << "Akun berhasil dibuat!" << endl;
 }
+
+bool login() {
+    string namaPengguna, kataSandi;
+
+    cout << "Masukkan nama pengguna: ";
+    cin >> namaPengguna;
+
+    cout << "Masukkan kata sandi: ";
+    cin >> kataSandi;
+
+    for (const Akun& akun : daftarAkun) {
+        if (akun.getNamaPengguna() == namaPengguna && akun.getKataSandi() == kataSandi) {
+            cout << "Login berhasil." << endl;
+            return true;
+        }
+    }
+
+    cout << "Nama pengguna atau kata sandi salah. Login gagal." << endl;
+    return false;
+}
+
+void setorUang() {
+    int nomorAkun;
+    double jumlah;
+
+    cout << "Masukkan nomor akun: ";
+    cin >> nomorAkun;
+
+    cout << "Masukkan jumlah yang akan disetor: ";
+    cin >> jumlah;
+
+    for (Akun& akun : daftarAkun) {
+        if (akun.getNomorAkun() == nomorAkun) {
+            akun.deposit(jumlah);
+            return;
+        }
+    }
+
+    cout << "Akun tidak ditemukan." << endl;
+}
