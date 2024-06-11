@@ -266,3 +266,52 @@ void tampilkanSemuaAkun() {
         cout << setw(15) << akun.getNomorAkun() << setw(20) << akun.getNama() << setw(15) << akun.getSaldo() << endl;
     }
 }
+
+void tampilkanRiwayatTransaksi() {
+    int nomorAkun;
+
+    cout << "Masukkan nomor akun: ";
+    cin >> nomorAkun;
+
+    for (const Akun& akun : daftarAkun) {
+        if (akun.getNomorAkun() == nomorAkun) {
+            akun.tampilkanRiwayatTransaksi();
+            return;
+        }
+    }
+
+    cout << "Akun tidak ditemukan." << endl;
+}
+
+int main() {
+    int pilihan;
+
+    while (true) {
+        cout << "\nMenu Utama\n";
+        cout << "1. Buat Akun\n";
+        cout << "2. Login\n";
+        cout << "3. Keluar\n";
+        cout << "Masukkan pilihan Anda: ";
+        cin >> pilihan;
+
+        switch (pilihan) {
+            case 1:
+                buatAkun();
+                break;
+            case 2:
+                if (daftarAkun.empty()) {
+                    cout << "Belum ada akun yang terdaftar. Silakan buat akun terlebih dahulu." << endl;
+                } else {
+                    if (login()) {
+                        // Menu utama setelah login
+                        while (true) {
+                            cout << "\nSistem Manajemen Bank\n";
+                            cout << "1. Setor Uang\n";
+                            cout << "2. Tarik Uang\n";
+                            cout << "3. Transfer Uang\n";
+                            cout << "4. Cek Saldo\n";
+                            cout << "5. Tampilkan Semua Akun\n";
+                            cout << "6. Tampilkan Riwayat Transaksi\n";
+                            cout << "7. Keluar\n";
+                            cout << "Masukkan pilihan Anda: ";
+                            cin >> pilihan;
