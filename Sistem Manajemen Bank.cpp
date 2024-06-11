@@ -46,3 +46,29 @@ public:
         cout << "Berhasil menambahkan " << jumlah << " ke akun " << nomorAkun << endl;
         catatTransaksi("Setor", jumlah);
     }
+
+ void tarik(double jumlah) {
+        if (jumlah > saldo) {
+            cout << "Saldo tidak mencukupi. Permintaan penarikan ditolak." << endl;
+        } else {
+            saldo -= jumlah;
+            cout << "Berhasil menarik " << jumlah << " dari akun " << nomorAkun << endl;
+            catatTransaksi("Tarik", -jumlah); // Nilai negatif menandakan penarikan
+        }
+    }
+
+    void cekSaldo() const {
+        cout << "Saldo akun " << nomorAkun << ": " << saldo << endl;
+    }
+
+    void transfer(Akun& tujuan, double jumlah) {
+        if (jumlah > saldo) {
+            cout << "Saldo tidak mencukupi untuk transfer." << endl;
+        } else {
+            tarik(jumlah);
+            tujuan.deposit(jumlah);
+            cout << "Transfer berhasil." << endl;
+            catatTransaksi("Transfer keluar", -jumlah); // Nilai negatif menandakan transfer keluar
+            tujuan.catatTransaksi("Transfer masuk", jumlah);
+        }
+    }
